@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({path: __dirname + '/.env'});
 
 // Since everything is in .env we don't need nested [env]s
 const config = {
