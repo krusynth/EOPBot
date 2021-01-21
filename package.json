@@ -1,0 +1,19 @@
+{
+  "name": "bot.hunt.works",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "krusynth",
+  "license": "MIT",
+  "scripts": {
+    "sequelize": "node node_modules/.bin/sequelize"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.5",
+    "dotenv": "^8.2.0",
+    "got": "^11.8.1",
+    "pg": "^8.5.1",
+    "sequelize": "^6.4.0",
+    "sequelize-cli": "^6.2.0",
+    "twitter-api-client": "^1.2.8"
+  }
+}

@@ -1,0 +1,10 @@
+var path = require('path');
+
+var folder = '';
+
+module.exports = {
+  'config':          path.resolve(folder, 'config.js'),
+  'migrations-path': path.resolve(folder, 'migrations'),
+  'models-path':     path.resolve(folder, 'models'),
+  'seeders-path':    path.resolve(folder, 'seeders')
+};
