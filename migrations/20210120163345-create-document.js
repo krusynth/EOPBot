@@ -9,10 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(2048)
       },
       url: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(1024)
       },
       type: {
         type: Sequelize.STRING

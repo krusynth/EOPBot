@@ -17,10 +17,10 @@ Yet another tool by [@krusynth](https://billhunt.dev)!
 
 Run `node ./index.js` to scrape the websites, tweets will automatically be created for new documents.
 
+**Note** The tool will not actually post items to Twitter until you set `ENV=production` in your `.env` file, instead it will show you what would have been posted.  However, this data is being set into the database. This allows you to safely import historical data without sending notifications.
 
 ## TODO:
 
-* Scrape all [presidential actions](https://www.whitehouse.gov/briefing-room/presidential-actions/)
 * Scrape [OMB actions besides memos](https://www.whitehouse.gov/omb/information-for-agencies/)
 * Look into support for[other EOP offices](https://www.whitehouse.gov/administration/executive-office-of-the-president/)
 * Create RSS Feed of updates.

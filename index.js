@@ -2,18 +2,24 @@
 
 const { Document } = require('./models');
 const OMBMemo = require('./lib/scrapers/OMBMemo');
+const PresidentialAction = require('./lib/scrapers/PresidentialAction');
 const { Op } = require('sequelize');
 const Twitter = require('./lib/services/Twitter');
 
 async function main() {
-  const scraper = new OMBMemo();
+  const ombmemo = new OMBMemo();
+  const presaction = new PresidentialAction();
 
   const twitter = new Twitter();
 
-  let items = await scraper.get();
+  let items = [];
+
+  items = items.concat ( await ombmemo.get() );
+  items = items.concat( await presaction.get() );
+
   let urls = items.map(elm => elm.url);
 
-  let existing = await Document.findAll({where: {type: scraper.name}});
+  let existing = await Document.findAll();
 
   let removedDocs = [];
 
