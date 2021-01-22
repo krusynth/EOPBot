@@ -42,10 +42,10 @@ async function main() {
   if(removedDocs.length) {
     let ids = removedDocs.map(elm => elm.id);
 
-    let destroyResult = await Document.destroy({where: {id: {[Op.in]: ids}}});
-    console.log('Destroyed', destroyResult);
+    // let destroyResult = await Document.destroy({where: {id: {[Op.in]: ids}}});
+    // console.log('Destroyed', destroyResult);
 
-    await twitter.notify('remove', removedDocs);
+    // await twitter.notify('remove', removedDocs);
   }
 
   if(items.length) {
