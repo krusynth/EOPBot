@@ -17,18 +17,25 @@ async function main() {
   items = items.concat ( await ombmemo.get() );
   items = items.concat( await presaction.get() );
 
-  let urls = items.map(elm => elm.url);
+  // Create a hash map
+  let urls = items.reduce((acc, elm) => {
+    if(!acc[elm.url]) {
+      acc[elm.url] = [];
+    }
+    acc[elm.url].push(elm);
+
+    return acc;
+  }, {});
+
 
   let existing = await Document.findAll();
 
   let removedDocs = [];
 
   existing.forEach(elm => {
-    let idx = urls.indexOf(elm.url);
     // If the doc exists, we don't need to add it.
-    if(idx > -1) {
-      delete urls[idx];
-      delete items[idx];
+    if(urls[elm.url]) {
+      delete urls[elm.url];
     }
     // If it no longer exists, we need to remove it from our cached list.
     else {
@@ -36,8 +43,13 @@ async function main() {
     }
   });
 
-  // Remove nulls.
-  items = items.filter(a => a);
+  // Convert our hash back to a list.
+  items = [];
+  let keys = Object.keys(urls);
+
+  for(let i = 0; i < keys.length; i++) {
+     items = items.concat(urls[keys[i]]);
+  }
 
   if(removedDocs.length) {
     let ids = removedDocs.map(elm => elm.id);
