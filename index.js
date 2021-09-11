@@ -3,19 +3,26 @@
 const { Document } = require('./models');
 const OMBMemo = require('./lib/scrapers/OMBMemo');
 const PresidentialAction = require('./lib/scrapers/PresidentialAction');
+const OMBNews = require('./lib/scrapers/OMBNews');
 const { Op } = require('sequelize');
 const Twitter = require('./lib/services/Twitter');
 
 async function main() {
-  const ombmemo = new OMBMemo();
-  const presaction = new PresidentialAction();
+  let sources = [];
+  [
+    OMBMemo,
+    PresidentialAction,
+    OMBNews
+  ].forEach(elm => {
+    sources.push(new elm());
+  });
 
   const twitter = new Twitter();
 
   let items = [];
-
-  items = items.concat ( await ombmemo.get() );
-  items = items.concat( await presaction.get() );
+  for(let i = 0; i < sources.length; i++) {
+    items = items.concat(await sources[i].get());
+  }
 
   // Create a hash map
   let urls = items.reduce((acc, elm) => {

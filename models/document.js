@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Document.init({
     name: DataTypes.STRING,
     url: DataTypes.STRING,
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    posted: DataTypes.DATEONLY
   }, {
     sequelize,
     tableName: 'documents',
