@@ -68,10 +68,17 @@ async function main() {
   }
 
   if(items.length) {
-    let createResult = await Document.bulkCreate(items);
-    console.log('Created', createResult.length);
+      let createResult = await Document.bulkCreate(items);
+      console.log('Created', createResult.length);
 
-    await twitter.notify('create', items);
+    if(items.length < 20) {
+      await twitter.notify('create', items);
+    }
+    else {
+      console.log('An error has occurred. A page may have changed!!!');
+      console.log(items);
+    }
+
   }
   else {
     console.log('No new items found.');
