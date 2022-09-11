@@ -6,6 +6,7 @@ const PresidentialAction = require('./lib/scrapers/PresidentialAction');
 const OMBNews = require('./lib/scrapers/OMBNews');
 const { Op } = require('sequelize');
 const Twitter = require('./lib/services/Twitter');
+const RSS = require('./lib/services/RSS');
 
 async function main() {
   let sources = [];
@@ -18,6 +19,7 @@ async function main() {
   });
 
   const twitter = new Twitter();
+  const rss = new RSS();
 
   let items = [];
   for(let i = 0; i < sources.length; i++) {
@@ -73,6 +75,7 @@ async function main() {
 
     if(items.length < 20) {
       await twitter.notify('create', items);
+      await rss.notify();
     }
     else {
       console.log('An error has occurred. A page may have changed!!!');
@@ -83,7 +86,10 @@ async function main() {
   else {
     console.log('No new items found.');
   }
-
+  /* begin testing */
+  // console.log("Test RSS");
+  // await rss.notify();
+  /* end testing */
 }
 
 main().then(() => {

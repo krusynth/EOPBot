@@ -8,7 +8,9 @@
     "sequelize": "node node_modules/.bin/sequelize"
   },
   "dependencies": {
+    "aws-sdk": "^2.1213.0",
     "dotenv": "^8.2.0",
+    "feed": "^4.2.2",
     "needle": "2.3.0",
     "osmosis": "^1.1.10",
     "pg": "^8.5.1",
@@ -16,6 +18,7 @@
     "sequelize-cli": "^6.2.0",
     "twitter-api-client": "^1.2.8"
   },
-  "resolutions": { "needle": "2.3.0" }
-
+  "resolutions": {
+    "needle": "2.3.0"
+  }
 }

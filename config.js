@@ -28,6 +28,13 @@ const config = {
     apiSecret: process.env.TWITTER_API_SECRET,
     accessToken: process.env.TWITTER_ACCESS_TOKEN,
     accessTokenSecret: process.env.TWITTER_ACCESS_SECRET
+  },
+  storage: {
+    endpoint: process.env.STORAGE_ENDPOINT,
+    key: process.env.STORAGE_KEY,
+    secret: process.env.STORAGE_SECRET,
+    bucket: process.env.STORAGE_BUCKET,
+    path: process.env.STORAGE_PATH
   }
 };
 
