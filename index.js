@@ -1,29 +1,18 @@
 'use strict';
 
 const { Document } = require('./models');
-const OMBMemo = require('./lib/scrapers/OMBMemo');
-const PresidentialAction = require('./lib/scrapers/PresidentialAction');
-const OMBNews = require('./lib/scrapers/OMBNews');
+const scrapers = require('./lib/scrapers');
 const { Op } = require('sequelize');
 const Twitter = require('./lib/services/Twitter');
 const RSS = require('./lib/services/RSS');
 
 async function main() {
-  let sources = [];
-  [
-    OMBMemo,
-    PresidentialAction,
-    OMBNews
-  ].forEach(elm => {
-    sources.push(new elm());
-  });
-
   const twitter = new Twitter();
   const rss = new RSS();
 
   let items = [];
-  for(let i = 0; i < sources.length; i++) {
-    items = items.concat(await sources[i].get());
+  for(const [name, scraper] of Object.entries(scrapers)) {
+    items = items.concat(await scraper.get());
   }
 
   // Create a hash map
