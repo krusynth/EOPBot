@@ -11,8 +11,12 @@ async function main() {
   const rss = new RSS();
 
   let items = [];
+  let last = 0;
+
   for(const [name, scraper] of Object.entries(scrapers)) {
     items = items.concat(await scraper.get());
+    console.log('Scraping ' + name + ' - found ' + (items.length - last));
+    last = items.length;
   }
 
   // Create a hash map
