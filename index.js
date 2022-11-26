@@ -3,11 +3,11 @@
 const { Document } = require('./models');
 const scrapers = require('./lib/scrapers');
 const { Op } = require('sequelize');
-const Twitter = require('./lib/services/Twitter');
+const Mastodon = require('./lib/services/Mastodon');
 const RSS = require('./lib/services/RSS');
 
 async function main() {
-  const twitter = new Twitter();
+  const mastodon = new Mastodon();
   const rss = new RSS();
 
   let items = [];
@@ -59,7 +59,7 @@ async function main() {
     // let destroyResult = await Document.destroy({where: {id: {[Op.in]: ids}}});
     // console.log('Destroyed', destroyResult);
 
-    // await twitter.notify('remove', removedDocs);
+    // await mastodon.notify('remove', removedDocs);
   }
 
   if(items.length) {
@@ -67,7 +67,7 @@ async function main() {
       console.log('Created', createResult.length);
 
     if(items.length < 20) {
-      await twitter.notify('create', items);
+      await mastodon.notify('create', items);
       await rss.notify();
     }
     else {

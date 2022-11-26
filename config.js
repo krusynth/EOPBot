@@ -23,11 +23,9 @@ const config = {
     name: process.env.HOSTNAME,
     port: process.env.PORT
   },
-  twitter: {
-    apiKey: process.env.TWITTER_API_KEY,
-    apiSecret: process.env.TWITTER_API_SECRET,
-    accessToken: process.env.TWITTER_ACCESS_TOKEN,
-    accessTokenSecret: process.env.TWITTER_ACCESS_SECRET
+  mastodon: {
+    api_url: process.env.MASTODON_URI,
+    access_token: process.env.MASTODON_TOKEN
   },
   storage: {
     endpoint: process.env.STORAGE_ENDPOINT,
